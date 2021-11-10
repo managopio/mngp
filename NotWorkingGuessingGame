@@ -1,0 +1,49 @@
+package de.uniwue.gdp.guessing;
+
+
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class GuessingGame {
+    public static void main(String[] args) {
+        int zufallszahl = 0;
+        int guess = 0;
+
+        String nextround;
+        boolean contn;
+        Scanner scanner = new Scanner(System.in);
+        while (contn = true) {
+            System.out.println("Welcome!");
+            zufallszahl = (int) (Math.random() * 2);
+            while (guess != zufallszahl) {
+                System.out.println("Please enter your guess: ");
+                String userinput = scanner.nextLine();
+                try {
+                    guess = Integer.parseInt(userinput);
+                } catch (ArithmeticException ae) {
+                    continue;
+                }
+                if (guess == zufallszahl) {
+                    System.out.println("You won!");
+                    System.out.println("Play again? [y/N]");
+                    nextround = scanner.nextLine();
+                    if (nextround == "N") {
+                        //contn = false;
+
+
+
+                    }
+                } else if (guess > zufallszahl) {
+
+                    System.out.println("Too high!");
+                } else if (guess < zufallszahl) {
+                    System.out.println("Too low!");
+                } else {
+                    System.out.println("Not a number - try again!");
+
+                }
+            } break;
+        }
+    }
+}

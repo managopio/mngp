@@ -1,0 +1,105 @@
+package de.uniwue.gdp.subsetsum;
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+
+public class SubsetSum {
+
+    public static void main(String[] args) {
+        double pi = Math.PI;
+        double[] zahlenMenge = Teil1();
+        double kleinsteSumme = zahlenMenge[0];
+        long kleinstesx=0;
+        for (long x = 0; x <= Math.pow(2, zahlenMenge.length); x++) {
+            double summe = 0;
+            for (int i = 0; i < zahlenMenge.length; i++) {
+                if (((x >> i) & 1) == 1)
+                    summe = summe + zahlenMenge[i];
+            }
+
+            if (Math.abs(pi - summe) < Math.abs(pi - kleinsteSumme)) {
+                 kleinstesx = x;
+                kleinsteSumme = summe;
+            }
+        }
+
+        double[] myArray = new double[Long.bitCount(kleinstesx)];
+        int amountnumbers = 0;
+        for (int k = 0; k <= zahlenMenge.length; k++) {
+            if (((kleinstesx >> k) & 1) == 1) {
+                myArray[amountnumbers] = zahlenMenge[k];
+                amountnumbers++;
+            }
+
+
+
+        }
+        System.out.println("Best subset sum:");
+        if(myArray.length>1) {
+            System.out.println(kleinsteSumme + " " + Arrays.toString(myArray));
+        } else {
+            System.out.println(kleinsteSumme + " " + "[" + kleinsteSumme + "]");
+        }
+
+    }
+
+    public static double[] Teil1() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("How many numbers should be read?");
+        double amountnumbers = scanner.nextDouble();
+        scanner.nextLine();
+        double[] myArray = new double[(int) amountnumbers];
+
+        System.out.println("Enter 1st number:");
+        myArray[0] = scanner.nextDouble();
+
+        if (amountnumbers > 1) {
+            System.out.println("Enter 2nd number:");
+            myArray[1] = scanner.nextDouble();
+        }
+        if (amountnumbers > 2) {
+            System.out.println("Enter 3rd number:");
+            myArray[2] = scanner.nextDouble();
+        }
+        if (amountnumbers > 3) {
+            for (int i = 3; i < amountnumbers; i++) {
+                System.out.println("Enter " + (i + 1) + "th number:");
+                myArray[i] = scanner.nextDouble();
+            }
+        }
+        return myArray;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
